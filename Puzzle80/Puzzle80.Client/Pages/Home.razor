@@ -1,0 +1,26 @@
+﻿@page "/"
+@inject IJSRuntime _jsRuntime
+
+<h1>Blazor Puzzle #80</h1>
+
+<p>This is a .NET 9 Blazor Web App with Global WebAssembly Interactivity</p>
+<p>This code is as simple as it gets for JavaScript Interop in Blazor.</p>
+<p>After loading, the app fails with an error that's virtually impossible to debug.</p>
+<p>What's going on here, and how do we fix it?</p>
+
+<script>
+    window.name = () => {
+        const answer = prompt("What is your name?");
+        alert("Hello " + answer + "!");
+    };
+</script>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _jsRuntime.InvokeVoidAsync("name");
+        }
+    }
+}
