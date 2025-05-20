@@ -1,0 +1,32 @@
+﻿@page "/"
+@inject IJSRuntime _jsRuntime
+
+<h1>Blazor Puzzle #80</h1>
+
+<p>This is a .NET 9 Blazor Web App with Global WebAssembly Interactivity</p>
+<p>This code is as simple as it gets for JavaScript Interop in Blazor.</p>
+<p>After loading, the app fails with an error that's virtually impossible to debug.</p>
+<p>What's going on here, and how do we fix it?</p>
+<br/>
+<br/>
+<p>The problem is that the proc is called "name", a label which is already used in Blazor. </p>
+<p>One fix is to simply rename it to something unique, like we did here.</p>
+<p>A better fix is to scope the JavaScript to this component.</p>
+<p>You can see how that is done by creating a new Razor Class Library project.</p>
+
+<script>
+    window.nameBlazorPuzzle = () => {
+        const answer = prompt("What is your name?");
+        alert("Hello " + answer + "!");
+    };
+</script>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _jsRuntime.InvokeVoidAsync("nameBlazorPuzzle");
+        }
+    }
+}
