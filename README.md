@@ -2,7 +2,7 @@
 
 Help Jeff and Carl figure out why their simple app is failing, and not offering much help.
 
-YouTube Video: https://youtu.be/
+YouTube Video: https://youtu.be/w447J952lT8
 
 Blazor Puzzle Home Page: https://blazorpuzzle.com
 
